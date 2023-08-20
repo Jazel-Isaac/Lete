@@ -1,0 +1,62 @@
+/* Override Bootstrap heading styles */
+
+
+h1, h2, h3, h5, h6 {
+    color: #333; /* Change heading color */
+  }
+h4{
+    color: #ffffff;
+}
+  
+  /* Change font color for paragraphs */
+  p {
+    color: #ffffff; /* Change paragraph font color */
+  }
+
+.greeting {
+    color: #6c757d;
+
+}
+
+ .social-links {
+    font-style: italic;
+    color: #6c757d;
+  
+ }
+  
+  /* Update background color for specific sections */
+  .jumbotron {
+    background-color: #f8f9fa; /* Change background color for jumbotron */
+  }
+  
+  /* Update background color for navigation bar */
+  .navbar {
+    background-color: #343a40; /* Change background color for navbar */
+    /* Make the navbar sticky */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Adjust this value if needed */
+  }
+/* Custom heading style */
+.custom-heading {
+    color: #e83e8c;
+    font-size: 24px;
+  }
+  
+  /* Card text (menu item description) */
+  .card-text {
+    color: #6c757d;
+    font-family: 'ADLaM Display', cursive;
+
+  }
+  footer {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #6c757d;
+
+
+  }
+/*  font-family: 'ADLaM Display', cursive;
+font-family: 'Barriecito', cursive;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Pacifico', cursive;    

@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./custom_styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,15 +48,15 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4>Order in!</h4>
-          <p class="text-body-secondary">"Flavors United" brings you the best of fast-food indulgence and wholesome goodness. Dive into our mouthwatering menu, featuring a fusion of global favorites and coastal delights. </p>
+          <h4>Hello!</h4>
+          <p class="greeting">"Flavors United" brings you the best of fast-food indulgence and wholesome goodness. Dive into our mouthwatering menu, featuring a fusion of global favorites and coastal delights. </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Contact</h4>
+          <h4>Get in touch.</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Instagram</a></li>
-            <li><a href="#" class="text-white">Chat via Whatsapp</a></li>
-            <li><a href="#" class="text-white">Call Us</a></li>
+            <li><a href="#" class="social-links">Follow on Instagram</a></li>
+            <li><a href="#" class="social-links">Chat via Whatsapp</a></li>
+            <li><a href="#" class="social-links">Call Us</a></li>
           </ul>
         </div>
       </div>
@@ -77,6 +78,10 @@
   </div>
 </header>
 <main>
+<!--heading & paragarph
+  <h2 class="custom-heading">Custom Heading</h2>
+<p class="custom-paragraph">This is a custom paragraph.</p>
+-->
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <form id="orderForm">
@@ -139,78 +144,92 @@
 
 </main>
 
-
-<footer class="text-body-secondary py-5">
+<footer class="footer">
   <div class="container">
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
   </div>
+  <div class="container text-center">
+    <p>| &copy; 2023 | Big time Media |</p>
+  </div>
+  
 </footer>
+
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Set the target time to 1:00 PM
-  const targetTime = new Date();
-  targetTime.setHours(13, 0, 0, 0); // 1:00 PM
-
-  function updateTimer() {
+  <script>
+    // Set the delivery times (in 24-hour format)
+    const deliveryTimes = [10, 13, 19]; // 10:00 AM, 1:00 PM, 7:00 PM
+  
+    // Get the nearest delivery time based on the current time
     const now = new Date();
-    const timeDifference = targetTime - now;
-
-    if (timeDifference > 0) {
-      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const countdownText = `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''} to delivery time`;
-      document.getElementById('countdown').textContent = countdownText;
-    } else {
-      document.getElementById('countdown').textContent = 'Delivery time has arrived!';
+    const nearestDeliveryTime = deliveryTimes.find(time => time > now.getHours());
+  
+    // Set the target time to the nearest delivery time
+    const targetTime = new Date();
+    targetTime.setHours(nearestDeliveryTime, 0, 0, 0);
+  
+    // Initialize the total price
+    let totalPrice = 0;
+  
+    function updateTimer() {
+      const currentTime = new Date();
+      const timeDifference = targetTime - currentTime;
+  
+      // Update the timer countdown
+      if (timeDifference > 0) {
+        const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const countdownText = `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''} to next delivery time`;
+        document.getElementById('countdown').textContent = countdownText;
+  
+        // Enable or disable the submit button based on timer
+        const submitButton = document.getElementById('submitButton');
+        if (hours >= 2) {
+          submitButton.classList.add('green');
+          submitButton.disabled = false;
+          document.getElementById('ordersText').textContent = 'Taking orders now';
+        } else {
+          submitButton.classList.remove('green');
+          submitButton.disabled = true;
+          document.getElementById('ordersText').textContent = '';
+        }
+      } else {
+        document.getElementById('countdown').textContent = 'Delivery time has arrived!';
+        document.getElementById('submitButton').disabled = true;
+        document.getElementById('ordersText').textContent = '';
+      }
     }
-
-    // Calculate total price and update the price counter
+  
+    // Update the timer every second
+    setInterval(updateTimer, 1000);
+  
+    // Add event listener to item checkboxes
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
     const priceCounter = document.getElementById('priceCounter');
-    const submitButton = document.getElementById('submitButton');
-    let totalPrice = 0;
-
+  
     itemCheckboxes.forEach(checkbox => {
       checkbox.addEventListener('change', () => {
+        const itemPrice = parseFloat(checkbox.getAttribute('data-price'));
         if (checkbox.checked) {
-          totalPrice += parseFloat(checkbox.getAttribute('data-price'));
+          totalPrice += itemPrice;
         } else {
-          totalPrice -= parseFloat(checkbox.getAttribute('data-price'));
+          totalPrice -= itemPrice;
         }
         priceCounter.textContent = totalPrice.toFixed(2);
       });
     });
-
-    // Update button color and text based on timer
-    if (timeDifference > 0) {
-      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-      if (hours >= 2) {
-        submitButton.classList.remove('green'); // Remove green class
-      } else {
-        submitButton.classList.add('green'); // Add green class
-        ordersText.textContent = 'Taking orders now'; // Display text
-      }
-    } else {
-      // Timer has reached 0, update button text and disable it
-      submitButton.textContent = 'Delivery time has arrived!';
-      submitButton.disabled = true;
-    }
-  }
-
-  // Update the timer every second
-  setInterval(updateTimer, 1000);
-
-  // Add tooltip with clock
-  $('[data-toggle="tooltip"]').tooltip({
-    title: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    placement: 'top',
-    trigger: 'hover'
-  });
-</script>
+  
+    // Initialize tooltip for clock
+    $('[data-toggle="tooltip"]').tooltip({
+      title: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      placement: 'top',
+      trigger: 'hover'
+    });
+  </script>
+  
 
 
     </body>
