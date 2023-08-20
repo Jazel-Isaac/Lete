@@ -7,10 +7,13 @@ h1, h2, h3, h5, h6 {
 h4{
     color: #ffffff;
 }
-  
+main {
+background-color: #343a40;
+
+}
   /* Change font color for paragraphs */
   p {
-    color: #ffffff; /* Change paragraph font color */
+    /*color: #ffffff; /* Change paragraph font color */
   }
 
 .greeting {
@@ -43,6 +46,9 @@ h4{
     font-size: 24px;
   }
   
+  .card-body {
+    background-color: #343a40;
+  }
   /* Card text (menu item description) */
   .card-text {
     color: #6c757d;
