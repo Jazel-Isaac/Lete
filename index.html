@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="./assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.115.4">
+    <title>Lete</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon_io/favicon.ico">
+
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<style>
+  /* Common styles */
+  .navbar-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Style for the red button */
+  #submitButton {
+    float: right;
+    background-color: red;
+    color: white;
+  }
+
+  /* Style for the green button when orders are being taken */
+  #submitButton.green {
+    background-color: green;
+  }
+</style>
+    
+  </head>
+  <body>
+    
+<header data-bs-theme="dark">
+  <div class="collapse text-bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4>Order in!</h4>
+          <p class="text-body-secondary">"Flavors United" brings you the best of fast-food indulgence and wholesome goodness. Dive into our mouthwatering menu, featuring a fusion of global favorites and coastal delights. </p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4>Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Follow on Instagram</a></li>
+            <li><a href="#" class="text-white">Chat via Whatsapp</a></li>
+            <li><a href="#" class="text-white">Call Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <img src="./assets/images/favicon_io/favicon.ico" alt="Favicon" class="me-2" width="20" height="20">
+        <strong>Lete</strong>
+      </a>
+      <div class="navbar-timer" id="countdown"></div>
+      <button type="submit" class="btn btn-primary" id="submitButton">Order in! ($<span id="priceCounter">0</span>)</button>
+      <span id="ordersText" class="ml-2"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+tell
+<main>
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <form id="orderForm">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+          <!-- Card 1 -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="./assets/images/fries.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Lete_fries">
+              <div class="card-body">
+                <p class="card-text">Crisp and seasoned, our golden fries are a savory delight that satisfies with every bite.</p>
+                <p class="card-price">Price: 200 Ksh</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input item-checkbox" id="item1" name="items[]" value="Fries" data-price="200">
+                    <label class="form-check-label" for="item1">Select</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="./assets/images/burger.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Lete_burger">
+              <div class="card-body">
+                <p class="card-text">From classic to creative, our burgers blend quality ingredients into a flavor-packed experience.</p>
+                <p class="card-price">Price: 250 Ksh</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input item-checkbox" id="item2" name="items[]" value="Burger" data-price="250">
+                    <label class="form-check-label" for="item2">Select</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="./assets/images/drinks.jpg" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Lete_drinks">
+              <div class="card-body">
+                <p class="card-text">Sip and savor with our range of refreshing beverages, perfectly paired with your meal.</p>
+                <p class="card-price">Price: 50 Ksh</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input item-checkbox" id="item3" name="items[]" value="Drinks" data-price="50">
+                    <label class="form-check-label" for="item3">Select</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-3">
+            <button type="submit" class="btn btn-primary" id="submitButton">Order in! ($<span id="priceCounter">0</span>)</button>
+            <span data-toggle="tooltip" title="Current time" class="ml-2"><i class="bi bi-clock"></i></span>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+
+<footer class="text-body-secondary py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+</footer>
+<script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Set the target time to 1:00 PM
+  const targetTime = new Date();
+  targetTime.setHours(13, 0, 0, 0); // 1:00 PM
+
+  function updateTimer() {
+    const now = new Date();
+    const timeDifference = targetTime - now;
+
+    if (timeDifference > 0) {
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const countdownText = `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''} to delivery time`;
+      document.getElementById('countdown').textContent = countdownText;
+    } else {
+      document.getElementById('countdown').textContent = 'Delivery time has arrived!';
+    }
+
+    // Calculate total price and update the price counter
+    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+    const priceCounter = document.getElementById('priceCounter');
+    const submitButton = document.getElementById('submitButton');
+    let totalPrice = 0;
+
+    itemCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          totalPrice += parseFloat(checkbox.getAttribute('data-price'));
+        } else {
+          totalPrice -= parseFloat(checkbox.getAttribute('data-price'));
+        }
+        priceCounter.textContent = totalPrice.toFixed(2);
+      });
+    });
+
+    // Update button color and text based on timer
+    if (timeDifference > 0) {
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      if (hours >= 2) {
+        submitButton.classList.remove('green'); // Remove green class
+      } else {
+        submitButton.classList.add('green'); // Add green class
+        ordersText.textContent = 'Taking orders now'; // Display text
+      }
+    } else {
+      // Timer has reached 0, update button text and disable it
+      submitButton.textContent = 'Delivery time has arrived!';
+      submitButton.disabled = true;
+    }
+  }
+
+  // Update the timer every second
+  setInterval(updateTimer, 1000);
+
+  // Add tooltip with clock
+  $('[data-toggle="tooltip"]').tooltip({
+    title: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    placement: 'top',
+    trigger: 'hover'
+  });
+</script>
+
+
+    </body>
+</html>
